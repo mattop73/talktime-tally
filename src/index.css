@@ -2,57 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* TalkTime Tally Design System - Professional Meeting App Theme */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 224 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 224 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 224 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Professional indigo/blue primary theme */
+    --primary: 237 84% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 237 84% 60%;
+    --primary-light: 237 50% 90%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Meeting status colors */
+    --meeting-active: 142 76% 36%;
+    --meeting-inactive: 0 0% 60%;
+    --speaking: 32 95% 44%;
+    --speaking-light: 32 95% 95%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Timer and accent colors */
+    --timer-bg: 237 50% 96%;
+    --timer-text: 237 84% 45%;
+    --leaderboard-gold: 45 93% 47%;
+    --leaderboard-silver: 0 0% 60%;
+    --leaderboard-bronze: 30 67% 48%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 224 15% 96%;
+    --secondary-foreground: 224 15% 25%;
+
+    --muted: 224 15% 95%;
+    --muted-foreground: 224 15% 45%;
+
+    --accent: 237 50% 94%;
+    --accent-foreground: 237 84% 35%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 224 15% 88%;
+    --input: 224 15% 88%;
+    --ring: 237 84% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(237 84% 55%), hsl(237 84% 65%));
+    --gradient-meeting: linear-gradient(135deg, hsl(237 50% 96%), hsl(237 30% 98%));
+    --gradient-timer: linear-gradient(135deg, hsl(32 95% 95%), hsl(32 70% 97%));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(237 84% 55% / 0.1), 0 2px 4px -2px hsl(237 84% 55% / 0.1);
+    --shadow-timer: 0 10px 25px -5px hsl(32 95% 44% / 0.2);
+    --shadow-hover: 0 10px 25px -5px hsl(237 84% 55% / 0.25);
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Sidebar theme */
+    --sidebar-background: 237 84% 55%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 237 84% 55%;
+    --sidebar-accent: 237 84% 60%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 237 84% 60%;
+    --sidebar-ring: 0 0% 100%;
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-timer: all 0.2s ease-in-out;
   }
 
   .dark {

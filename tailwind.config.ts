@@ -26,7 +26,9 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					hover: 'hsl(var(--primary-hover))',
+					light: 'hsl(var(--primary-light))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -61,7 +63,39 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Meeting-specific colors
+				meeting: {
+					active: 'hsl(var(--meeting-active))',
+					inactive: 'hsl(var(--meeting-inactive))'
+				},
+				speaking: {
+					DEFAULT: 'hsl(var(--speaking))',
+					light: 'hsl(var(--speaking-light))'
+				},
+				timer: {
+					bg: 'hsl(var(--timer-bg))',
+					text: 'hsl(var(--timer-text))'
+				},
+				leaderboard: {
+					gold: 'hsl(var(--leaderboard-gold))',
+					silver: 'hsl(var(--leaderboard-silver))',
+					bronze: 'hsl(var(--leaderboard-bronze))'
 				}
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-meeting': 'var(--gradient-meeting)',
+				'gradient-timer': 'var(--gradient-timer)'
+			},
+			boxShadow: {
+				'card': 'var(--shadow-card)',
+				'timer': 'var(--shadow-timer)',
+				'hover': 'var(--shadow-hover)'
+			},
+			transitionProperty: {
+				'smooth': 'var(--transition-smooth)',
+				'timer': 'var(--transition-timer)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
