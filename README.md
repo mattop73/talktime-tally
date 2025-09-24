@@ -1,73 +1,193 @@
-# Welcome to your Lovable project
+# TalkTime Tally
 
-## Project info
+A modern web application for tracking speaking time during meetings and conferences. Monitor participants, manage discussion topics, and collect questions in real-time with precision timing.
 
-**URL**: https://lovable.dev/projects/7028823f-6035-4a11-9ea5-cba02de16148
+![TalkTime Tally](https://img.shields.io/badge/Version-1.0.0-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react) ![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?logo=typescript)
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+### 🎯 Core Functionality
+- **Real-time Speaker Tracking** - Monitor who's speaking and for how long
+- **Meeting Management** - Create, start, pause, and end meetings
+- **Participant Management** - Add/remove participants and track their speaking statistics
+- **Speaking Sessions** - Track individual speaking sessions with start/stop functionality
+- **Time Analytics** - View total speaking time and session counts per participant
 
-**Use Lovable**
+### 📊 Advanced Features  
+- **Subject Management** - Organize discussions by topics and subjects
+- **Question Collection** - Gather and manage questions from participants
+- **Progress Visualization** - Real-time progress bars and statistics
+- **Session History** - Complete history of all speaking sessions
+- **User Authentication** - Secure login with Supabase Auth
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7028823f-6035-4a11-9ea5-cba02de16148) and start prompting.
+### 🎨 User Experience
+- **Responsive Design** - Works seamlessly on desktop and mobile devices
+- **Modern UI** - Clean interface built with shadcn/ui components
+- **Real-time Updates** - Live synchronization across all connected clients
+- **Intuitive Controls** - Easy-to-use play/pause/stop controls
+- **Visual Feedback** - Clear indicators for active speakers and session status
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Node.js 18+ and npm
+- Supabase account (for authentication and data storage)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Installation
 
-Follow these steps:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/talktime-tally.git
+   cd talktime-tally
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+3. **Set up environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
+   VITE_SUPABASE_PROJECT_ID=your_supabase_project_id
+   ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+4. **Set up Supabase database**
+   
+   Run the provided SQL migrations in your Supabase dashboard:
+   ```bash
+   # Apply migrations from supabase/migrations/
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+5. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   
+   Navigate to `http://localhost:8080`
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 18.3.1 with TypeScript
+- **Build Tool**: Vite 5.4.19
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Styling**: Tailwind CSS 3.4.17
+- **Authentication**: Supabase Auth
+- **Database**: Supabase (PostgreSQL)
+- **State Management**: React Query (TanStack Query)
+- **Routing**: React Router DOM 6.30.1
+- **Icons**: Lucide React
+- **Forms**: React Hook Form with Zod validation
+
+## 📁 Project Structure
+
+```
+talktime-tally/
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # shadcn/ui components
+│   │   ├── ActiveMeetingView.tsx
+│   │   ├── MeetingDashboard.tsx
+│   │   ├── ParticipantTimer.tsx
+│   │   └── ...
+│   ├── hooks/              # Custom React hooks
+│   ├── integrations/       # External service integrations
+│   │   └── supabase/      # Supabase client and types
+│   ├── lib/               # Utility functions
+│   ├── pages/             # Page components
+│   └── main.tsx           # Application entry point
+├── supabase/
+│   ├── migrations/        # Database migrations
+│   └── config.toml       # Supabase configuration
+├── public/               # Static assets
+└── package.json         # Dependencies and scripts
 ```
 
-**Edit a file directly in GitHub**
+## 🎮 Usage
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Creating a Meeting
+1. Sign in to your account
+2. Click "Create New Meeting" 
+3. Enter meeting title and configure settings
+4. Add participants to the meeting
 
-**Use GitHub Codespaces**
+### Managing Speaking Time
+1. Start the meeting timer
+2. Click participant names to start/stop their speaking time
+3. Use play/pause controls for overall meeting control
+4. View real-time statistics and progress
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Organizing Content
+- **Subjects**: Add topics and discussion points
+- **Questions**: Collect questions from participants
+- **Analytics**: Review speaking time distribution
 
-## What technologies are used for this project?
+## 🔧 Development
 
-This project is built with:
+### Available Scripts
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run build:dev    # Build in development mode
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+```
 
-## How can I deploy this project?
+### Database Schema
 
-Simply open [Lovable](https://lovable.dev/projects/7028823f-6035-4a11-9ea5-cba02de16148) and click on Share -> Publish.
+The application uses the following main tables:
+- `meetings` - Meeting information and status
+- `participants` - Meeting participants and their data
+- `speaking_sessions` - Individual speaking time records
+- `subjects` - Discussion topics
+- `questions` - Collected questions
 
-## Can I connect a custom domain to my Lovable project?
+## 🚀 Deployment
 
-Yes, you can!
+### Build for Production
+```bash
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Environment Variables for Production
+Ensure all environment variables are properly set in your production environment:
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`  
+- `VITE_SUPABASE_PROJECT_ID`
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [React](https://reactjs.org/)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+- Backend powered by [Supabase](https://supabase.com/)
+- Icons by [Lucide](https://lucide.dev/)
+
+## 📞 Support
+
+If you have any questions or need help, please:
+- Open an issue on GitHub
+- Check the [documentation](https://github.com/yourusername/talktime-tally/wiki)
+- Contact the maintainers
+
+---
+
+Made with ❤️ for better meeting management
