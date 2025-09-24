@@ -169,8 +169,18 @@ This project is configured for easy deployment on Railway:
 3. **Deploy**: Railway will automatically detect the configuration and deploy
 
 The project includes:
-- `railway.json` - Railway-specific build configuration
-- `nixpacks.toml` - Build environment specification
+- `railway.json` - Railway-specific build configuration (Dockerfile-based)
+- `Dockerfile` - Custom Docker build for better cache control
+- `nixpacks.toml` - Alternative build environment specification
+- `.dockerignore` - Prevents unnecessary files from being copied
+
+### Troubleshooting Railway Deployment
+
+If you encounter cache-related build errors:
+
+1. **Option 1**: The project uses a custom Dockerfile by default
+2. **Option 2**: If Dockerfile fails, rename `railway-alt.json` to `railway.json` to use Nixpacks
+3. **Option 3**: In Railway dashboard, try clearing the build cache and redeploy
 
 ### Local Development with Production Environment
 
