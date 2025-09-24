@@ -8,8 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview --host 0.0.0.0",
-    "start": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0 --allowed-hosts all",
+    "start": "vite preview --host 0.0.0.0 --allowed-hosts all"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
