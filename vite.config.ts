@@ -11,6 +11,7 @@ export default defineConfig(({ mode }) => ({
   preview: {
     host: "::",
     port: process.env.PORT ? parseInt(process.env.PORT) : 4173,
+    allowedHosts: 'all',
   },
   plugins: [react()],
   resolve: {
