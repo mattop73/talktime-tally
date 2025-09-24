@@ -30,17 +30,46 @@ export const ParticipantsNameList = ({
   const [newParticipantName, setNewParticipantName] = useState("");
   const [isAdding, setIsAdding] = useState(false);
   const [activeParticipant, setActiveParticipant] = useState<string | null>(null);
+  const [sessionStartTimes, setSessionStartTimes] = useState<Record<string, number>>({});
+  const [currentSessionTimes, setCurrentSessionTimes] = useState<Record<string, number>>({});
   const { toast } = useToast();
 
-  // Find currently speaking participant
+  // Find currently speaking participant and manage session times
   useEffect(() => {
     const currentlySpeaking = participants.find(p => p.is_currently_speaking);
     if (currentlySpeaking) {
       setActiveParticipant(currentlySpeaking.id);
+      // If we don't have a start time for this participant, set it now
+      if (!sessionStartTimes[currentlySpeaking.id]) {
+        setSessionStartTimes(prev => ({
+          ...prev,
+          [currentlySpeaking.id]: Date.now()
+        }));
+      }
     } else {
       setActiveParticipant(null);
+      // Clear session start times when no one is speaking
+      setSessionStartTimes({});
+      setCurrentSessionTimes({});
     }
-  }, [participants]);
+  }, [participants, sessionStartTimes]);
+
+  // Timer effect to update current session times
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const newSessionTimes: Record<string, number> = {};
+      
+      Object.entries(sessionStartTimes).forEach(([participantId, startTime]) => {
+        const elapsed = Math.floor((now - startTime) / 1000);
+        newSessionTimes[participantId] = elapsed;
+      });
+      
+      setCurrentSessionTimes(newSessionTimes);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [sessionStartTimes]);
 
   const addParticipant = async () => {
     if (!newParticipantName.trim()) return;
@@ -143,14 +172,31 @@ export const ParticipantsNameList = ({
         setActiveParticipant(participantId);
         onActiveChange({ participantId });
       } else {
-        // End the current speaking session
+        // Calculate session duration
+        const sessionDuration = currentSessionTimes[participantId] || 0;
+        
+        // End the current speaking session with duration
         const { error: endError } = await supabase
           .from('speaking_sessions')
-          .update({ ended_at: new Date().toISOString() })
+          .update({ 
+            ended_at: new Date().toISOString(),
+            duration: sessionDuration
+          })
           .eq('participant_id', participantId)
           .is('ended_at', null);
 
         if (endError) throw endError;
+
+        // Update participant's total speaking time and session count
+        const { error: updateError } = await supabase
+          .from('participants')
+          .update({
+            total_speaking_time: participant.total_speaking_time + sessionDuration,
+            speaking_sessions: participant.speaking_sessions + 1
+          })
+          .eq('id', participantId);
+
+        if (updateError) throw updateError;
 
         setActiveParticipant(null);
         onActiveChange(null);
@@ -226,14 +272,31 @@ export const ParticipantsNameList = ({
             </div>
             
             <div className="space-y-1">
-              <div className="flex justify-between text-xs text-gray-600">
-                <span>Total Time:</span>
-                <span>{formatTime(participant.total_speaking_time)}</span>
-              </div>
-              <div className="flex justify-between text-xs text-gray-600">
-                <span>Sessions:</span>
-                <span>{participant.speaking_sessions}</span>
-              </div>
+              {participant.is_currently_speaking ? (
+                <>
+                  <div className="flex justify-between text-xs text-gray-600">
+                    <span>Current Session:</span>
+                    <span className="font-medium text-green-600">
+                      {formatTime(currentSessionTimes[participant.id] || 0)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-600">
+                    <span>Total Sessions:</span>
+                    <span>{participant.speaking_sessions}</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-between text-xs text-gray-600">
+                    <span>Total Time:</span>
+                    <span>{formatTime(participant.total_speaking_time)}</span>
+                  </div>
+                  <div className="flex justify-between text-xs text-gray-600">
+                    <span>Sessions:</span>
+                    <span>{participant.speaking_sessions}</span>
+                  </div>
+                </>
+              )}
             </div>
 
             {participant.is_currently_speaking && (
