@@ -24,6 +24,26 @@ export const MeetingDashboard = () => {
 
   useEffect(() => {
     fetchMeetings();
+    
+    // Set up real-time subscription for meetings so all users see new meetings instantly
+    const meetingsChannel = supabase
+      .channel('meetings-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'meetings'
+        },
+        () => {
+          fetchMeetings();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(meetingsChannel);
+    };
   }, []);
 
   const fetchMeetings = async () => {
