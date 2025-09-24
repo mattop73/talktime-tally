@@ -156,8 +156,34 @@ The application uses the following main tables:
 npm run build
 ```
 
-### Environment Variables for Production
-Ensure all environment variables are properly set in your production environment:
+### Railway Deployment
+
+This project is configured for easy deployment on Railway:
+
+1. **Connect Repository**: Link your GitHub repository to Railway
+2. **Set Environment Variables** in Railway dashboard:
+   - `VITE_SUPABASE_URL` - Your Supabase project URL
+   - `VITE_SUPABASE_PUBLISHABLE_KEY` - Your Supabase anon key
+   - `VITE_SUPABASE_PROJECT_ID` - Your Supabase project ID
+
+3. **Deploy**: Railway will automatically detect the configuration and deploy
+
+The project includes:
+- `railway.json` - Railway-specific build configuration
+- `nixpacks.toml` - Build environment specification
+
+### Local Development with Production Environment
+
+Copy the environment variables from Railway to your local `.env` file:
+
+```bash
+cp .env.example .env
+# Edit .env with your actual Supabase credentials
+```
+
+### Other Deployment Platforms
+
+For other platforms (Vercel, Netlify, etc.), ensure environment variables are set:
 - `VITE_SUPABASE_URL`
 - `VITE_SUPABASE_PUBLISHABLE_KEY`  
 - `VITE_SUPABASE_PROJECT_ID`
