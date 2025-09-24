@@ -14,6 +14,9 @@ COPY . .
 # Build the application
 RUN npm run build
 
+# Set environment variable to disable host checking
+ENV VITE_HOST_CHECK=false
+
 # Expose the port that Vite preview runs on
 EXPOSE 4173
 
