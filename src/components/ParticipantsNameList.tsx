@@ -134,7 +134,7 @@ export const ParticipantsNameList = ({
             {
               participant_id: participantId,
               meeting_id: meetingId,
-              start_time: new Date().toISOString(),
+              started_at: new Date().toISOString(),
             }
           ]);
 
@@ -146,9 +146,9 @@ export const ParticipantsNameList = ({
         // End the current speaking session
         const { error: endError } = await supabase
           .from('speaking_sessions')
-          .update({ end_time: new Date().toISOString() })
+          .update({ ended_at: new Date().toISOString() })
           .eq('participant_id', participantId)
-          .is('end_time', null);
+          .is('ended_at', null);
 
         if (endError) throw endError;
 
